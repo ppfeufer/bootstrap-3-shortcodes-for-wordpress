@@ -10,3 +10,6 @@ To install the plugin simply [download the archive](https://github.com/ppfeufer/
 
 ### Changelog
 see [CHANGELOG.md](CHANGELOG.md)
+
+### Documentation
+see [DOCUMENTATION.md](documentation/DOCUMENTATION.md)
