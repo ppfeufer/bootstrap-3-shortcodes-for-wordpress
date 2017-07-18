@@ -19,8 +19,8 @@ class Shortcodes {
 		$shortcodes = array(
 			'alert',
 			'badge',
-//			'breadcrumb',
-//			'breadcrumb-item',
+			'breadcrumb',
+			'breadcrumb-item',
 //			'button',
 //			'button-group',
 //			'button-toolbar',
@@ -135,7 +135,7 @@ class Shortcodes {
 	 *		[badge]42[/badge]
 	 *
 	 * Supported Arguments:
-	 *		right	true/false (Default: false) / pull the badge to teh right side or not
+	 *		right	true/false (Default: false) / pull the badge to the right side or not
 	 *		xclass
 	 *		data
 	 *
@@ -156,7 +156,7 @@ class Shortcodes {
 
 		$class = 'badge';
 		$class .= ($args['right'] !== false) ? ' pull-right' : '';
-		$class .= ($args['xclass'] ) ? ' ' . $args['xclass'] : '';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
 
@@ -165,6 +165,89 @@ class Shortcodes {
 			\esc_attr(trim($class)),
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content)
+		);
+	}
+
+	/**
+	 * Shortcode:
+	 *		[breadcrumb][/breadcrumb]
+	 *
+	 * Supported Arguments:
+	 *		xclass
+	 *		data
+	 *
+	 * @link http://getbootstrap.com/components/#breadcrumbs Bootstrap 3 Breadcrumbs
+	 * @depends shortcodeBreadcrumbItem
+	 *
+	 * @param array $atts
+	 * @param string $content
+	 * @return string
+	 */
+	function shortcodeBreadcrumb($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$class = 'breadcrumb';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		return \sprintf(
+			'<ol class="%1$s"%2$s>%3$s</ol>',
+			\esc_attr(trim($class)),
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			\do_shortcode($content)
+		);
+	}
+
+	/**
+	 * Shortcode:
+	 *		[breadcrumb-item][/breadcrumb-item]
+	 *
+	 * Supported Arguments:
+	 *		link
+	 *		active
+	 *		xclass
+	 *		data
+	 *
+	 * @link http://getbootstrap.com/components/#breadcrumbs Bootstrap 3 Breadcrumbs
+	 * @depends shortcodeBreadcrumb
+	 *
+	 * @param array $atts
+	 * @param string $content
+	 * @return string
+	 */
+	function shortcodeBreadcrumbItem($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'link' => false,
+				'active' => false,
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$class = '';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$active = ($args['active'] !== false) ? ' class="active"' : '';
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		$link = ($atts['link']) ? \sprintf('<a href="%1$s" class="%2$s"%3$s>%4$s</a>',
+			\esc_url($atts['link']),
+			\esc_attr(trim($class)),
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			\do_shortcode($content)
+		) : \do_shortcode($content);
+
+		return \sprintf(
+			'<li%1$s>%2$s</li>',
+			$active,
+			$link
 		);
 	}
 } // END class Shortcodes
