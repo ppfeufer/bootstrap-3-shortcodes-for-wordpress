@@ -18,7 +18,7 @@ class Shortcodes {
 	private function getShortcodeArray() {
 		$shortcodes = array(
 			'alert',
-//			'badge',
+			'badge',
 //			'breadcrumb',
 //			'breadcrumb-item',
 //			'button',
@@ -96,6 +96,8 @@ class Shortcodes {
 	 *		xclass
 	 *		data
 	 *
+	 * @link http://getbootstrap.com/components/#alerts Bootstrap 3 Alerts
+	 *
 	 * @param array $atts
 	 * @param string $content
 	 * @return string
@@ -112,7 +114,7 @@ class Shortcodes {
 
 		$class = 'alert';
 		$class .= ($args['type'] !== false) ? ' alert-' . $args['type'] : ' alert-success';
-		$class .= ($args['dismissable'] === true) ? ' alert-dismissable' : '';
+		$class .= ($args['dismissable'] !== false) ? ' alert-dismissable' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dismissableButton = ($args['dismissable']) ? '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' : '';
@@ -124,6 +126,44 @@ class Shortcodes {
 			\esc_attr(\trim($class)),
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			$dismissableButton,
+			\do_shortcode($content)
+		);
+	}
+
+	/**
+	 * Shortcode:
+	 *		[badge]42[/badge]
+	 *
+	 * Supported Arguments:
+	 *		right	true/false (Default: false) / pull the badge to teh right side or not
+	 *		xclass
+	 *		data
+	 *
+	 * @link http://getbootstrap.com/components/#badges Bootstrap 3 Badges
+	 *
+	 * @param array $atts
+	 * @param string $content
+	 * @return string
+	 */
+	public function shortcodeBadge($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'right' => false,
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$class = 'badge';
+		$class .= ($args['right'] !== false) ? ' pull-right' : '';
+		$class .= ($args['xclass'] ) ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		return \sprintf(
+			'<span class="%1$s"%2$s>%3$s</span>',
+			\esc_attr(trim($class)),
+			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content)
 		);
 	}
