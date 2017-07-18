@@ -70,6 +70,8 @@ This has to be in one line, because of the way the WordPress editor is handling 
 
 ![](images/carousel-shortcode.jpg)
 
-```[carousel][carousel-item]<img class="alignnone size-large wp-image-1896" src="image_1.jpg" alt="" width="1030" height="547" />[/carousel-item][carousel-item]<img class="alignnone size-large wp-image-1895" src="image_2.jpg" alt="" width="1030" height="547" />[/carousel-item][/carousel]```
+```
+[carousel][carousel-item]<img class="alignnone size-large wp-image-1896" src="image_1.jpg" alt="" width="1030" height="547" />[/carousel-item][carousel-item]<img class="alignnone size-large wp-image-1895" src="image_2.jpg" alt="" width="1030" height="547" />[/carousel-item][/carousel]
+```
 
 This has to be in one line, because of the way the WordPress editor is handling line breaks.
