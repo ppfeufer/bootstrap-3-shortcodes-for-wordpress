@@ -3,6 +3,10 @@
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
 class Shortcodes {
+	private $carouselCount = null;
+	private $carouselDefaultCount = null;
+	private $carouselDefaultActive = true;
+
 	/**
 	 * Constructor
 	 */
@@ -24,9 +28,9 @@ class Shortcodes {
 			'button',
 			'button-group',
 			'button-toolbar',
-//			'caret',
-//			'carousel',
-//			'carousel-item',
+			'caret',
+			'carousel',
+			'carousel-item',
 //			'code',
 //			'collapse',
 //			'collapsibles',
@@ -128,7 +132,7 @@ class Shortcodes {
 			$dismissableButton,
 			\do_shortcode($content)
 		);
-	}
+	} // END public function shortcodeAlert($atts, $content = null)
 
 	/**
 	 * Shortcode:
@@ -166,7 +170,7 @@ class Shortcodes {
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content)
 		);
-	}
+	} // END public function shortcodeBadge($atts, $content = null)
 
 	/**
 	 * Shortcode:
@@ -183,7 +187,7 @@ class Shortcodes {
 	 * @param string $content
 	 * @return string
 	 */
-	function shortcodeBreadcrumb($atts, $content = null) {
+	public function shortcodeBreadcrumb($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'xclass' => false,
@@ -202,7 +206,7 @@ class Shortcodes {
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content)
 		);
-	}
+	} // END public function shortcodeBreadcrumb($atts, $content = null)
 
 	/**
 	 * Shortcode:
@@ -221,7 +225,7 @@ class Shortcodes {
 	 * @param string $content
 	 * @return string
 	 */
-	function shortcodeBreadcrumbItem($atts, $content = null) {
+	public function shortcodeBreadcrumbItem($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'link' => false,
@@ -249,7 +253,7 @@ class Shortcodes {
 			$active,
 			$link
 		);
-	}
+	} // END public function shortcodeBreadcrumbItem($atts, $content = null)
 
 	/**
 	 * Shortcode:
@@ -274,7 +278,7 @@ class Shortcodes {
 	 * @param string $content
 	 * @return string
 	 */
-	function shortcodeButton($atts, $content = null) {
+	public function shortcodeButton($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'type' => false,
@@ -311,7 +315,7 @@ class Shortcodes {
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content)
 		);
-	}
+	} // END public function shortcodeButton($atts, $content = null)
 
 	/**
 	 * Shortcode:
@@ -331,7 +335,7 @@ class Shortcodes {
 	 * @param string $content
 	 * @return string
 	 */
-	function shortcodeButtonGroup($atts, $content = null) {
+	public function shortcodeButtonGroup($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'size' => false,
@@ -358,7 +362,7 @@ class Shortcodes {
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content)
 		);
-	}
+	} // END public function shortcodeButtonGroup($atts, $content = null)
 
 	/**
 	 * Shortcode:
@@ -374,7 +378,7 @@ class Shortcodes {
 	 * @param string $content
 	 * @return string
 	 */
-	function shortcodeButtonToolbar($atts, $content = null) {
+	public function shortcodeButtonToolbar($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'xclass' => false,
@@ -392,6 +396,162 @@ class Shortcodes {
 			\esc_attr(\trim($class) ),
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content)
+		);
+	} // END public function shortcodeButtonToolbar($atts, $content = null)
+
+	function shortcodeCaret($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$class  = 'caret';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		return sprintf(
+			'<span class="%1$s"%2$s>%3$s</span>',
+			\esc_attr(\trim($class) ),
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			\do_shortcode($content)
+		);
+	}
+
+	/**
+	 * Shortcode:
+	 *		[carousel][/carousel]
+	 *
+	 * Supported Arguments:
+	 *		interval
+	 *		pause
+	 *		wrap
+	 *		xclass
+	 *		data
+	 *
+	 * @link http://getbootstrap.com/javascript/#carousel Bootstrap 3 Carousel
+	 *
+	 * @param array $atts
+	 * @param string $content
+	 * @return string
+	 */
+	function shortcodeCarousel($atts, $content = null) {
+		$this->carouselCount = \uniqid();
+
+		$this->carouselDefaultCount = 0;
+
+		$args = \shortcode_atts(
+			array(
+				'interval' => false,
+				'pause'  => false,
+				'wrap' => false,
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$divClass  = 'carousel slide';
+		$divClass .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$innerClass = 'carousel-inner';
+
+		$id = 'bootstrap-carousel-'. $this->carouselCount;
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$attributeMap = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::getAttributeMap($content);
+
+		// Extract the slide titles for use in the carousel widget.
+		if($attributeMap) {
+			$indicators = array();
+			$this->carouselDefaultActive = true;
+
+			foreach($attributeMap as $check) {
+				if(!empty($check['carousel-item']['active'])) {
+					$this->carouselDefaultActive = false;
+				}
+			}
+
+			$i = 0;
+			foreach($attributeMap as $slide) {
+				$indicators[] = \sprintf(
+					'<li class="%1$s" data-target="%2$s" data-slide-to="%3$s"></li>',
+					(!empty($slide['carousel-item']['active']) || ($this->carouselDefaultActive && $i == 0)) ? 'active' : '',
+					\esc_attr('#' . $id),
+					\esc_attr($i)
+				);
+
+				$i++;
+			}
+		}
+
+		return \sprintf(
+			'<div class="%1$s" id="%2$s" data-ride="carousel"%3$s%4$s%5$s%6$s>%7$s<div class="%8$s">%9$s</div>%10$s%11$s</div>',
+			\esc_attr($divClass),
+			\esc_attr($id),
+			($args['interval'] !== false) ? \sprintf(' data-interval="%1$d"', $args['interval']) : '',
+			($args['pause'] !== false) ? \sprintf(' data-pause="%1$s"', \esc_attr($args['pause'])) : '',
+			($args['wrap'] !== false) ? \sprintf(' data-wrap="%1$s"', \esc_attr($args['wrap'])) : '',
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			(\count($indicators) > 0) ? '<ol class="carousel-indicators">' . \implode($indicators) . '</ol>' : '',
+			\esc_attr($innerClass),
+			\do_shortcode($content),
+			'<a class="left carousel-control" href="' . \esc_url('#' . $id) . '" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>',
+			'<a class="right carousel-control" href="' . \esc_url('#' . $id) . '" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
+		);
+	}
+
+	/**
+	 * Shortcode:
+	 *		[carousel-item][/carousel-item]
+	 *
+	 * Supported Arguments:
+	 *		active
+	 *		caption
+	 *		xclass
+	 *		data
+	 *
+	 * @link http://getbootstrap.com/javascript/#carousel Bootstrap 3 Carousel
+	 *
+	 * @param array $atts
+	 * @param string $content
+	 * @return string
+	 */
+	function shortcodeCarouselItem($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'active'  => false,
+				'caption' => false,
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		if($this->carouselDefaultActive && $this->carouselDefaultCount == 0 ) {
+			$args['active'] = true;
+		}
+
+		$this->carouselDefaultCount++;
+
+		$class  = 'item';
+		$class .= ($args['active'] !== false) ? ' active' : '';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		//$content = preg_replace('/class=".*?"/', '', $content);
+		$content = \preg_replace('/alignnone/', '', $content);
+		$content = \preg_replace('/alignright/', '', $content);
+		$content = \preg_replace('/alignleft/', '', $content);
+		$content = \preg_replace('/aligncenter/', '', $content);
+
+		return \sprintf(
+			'<div class="%1$s"%2$s>%3$s%4$s</div>',
+			\esc_attr(\trim($class)),
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			\do_shortcode($content),
+			($args['caption'] !== false) ? '<div class="carousel-caption">' . \esc_html($args['caption']) . '</div>' : ''
 		);
 	}
 } // END class Shortcodes

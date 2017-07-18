@@ -6,3 +6,4 @@
 - Shortcode ```[badge]```
 - Shortcode ```[breadcrumb]``` and ```[breadcrumb-item]```
 - Shortcode ```[button]``` and ```[button-group]``` and ```[button-toolbar]```
+- Shortcode ```[carousel]``` and ```[carousel-item]```
