@@ -7,6 +7,9 @@ class Shortcodes {
 	private $carouselDefaultCount = null;
 	private $carouselDefaultActive = true;
 
+	private $accordionCount = null;
+	private $accordionGroupCount = null;
+
 	/**
 	 * Constructor
 	 */
@@ -21,6 +24,9 @@ class Shortcodes {
 	 */
 	private function getShortcodeArray() {
 		$shortcodes = array(
+			'accordion',
+			'accordion-group',
+			'accordion-item',
 			'alert',
 			'badge',
 			'breadcrumb',
@@ -31,7 +37,7 @@ class Shortcodes {
 			'caret',
 			'carousel',
 			'carousel-item',
-//			'code',
+			'code',
 //			'collapse',
 //			'collapsibles',
 //			'column',
@@ -89,6 +95,82 @@ class Shortcodes {
 			\add_shortcode($shortcode, array($this, 'shortcode' . \WordPress\Plugin\BootstrapShortcodes\Helper\StringHelper::camelCase($shortcode, true)));
 		} // END foreach($shortcodes as $shortcode)
 	} // END public function registerShortcodes()
+
+	public function shortcodeAccordion($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'title' => false,
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$this->accordionCount = \uniqid();
+
+		$class = 'panel panel-default bootstrap-accordion';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		return \sprintf(
+			'<div class="%1$s"%2$s><div class="panel-heading" role="tab" id="%3$s"><h4 class="panel-title"><a class="bootstrap-accordion-title collapsed" role="button" data-toggle="collapse" data-parent="%4$s" href="%5$s" aria-expanded="false" aria-controls="%6$s">%7$s<span class="caret collapse-toggle" data-toggle="collapse"><i></i></span></a></h4></div>%8$s</div>',
+			\esc_attr(\trim($class)),
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			'heading' . $this->accordionCount,
+			'#accordion-' . $this->accordionGroupCount,
+			'#collapse' . $this->accordionCount,
+			'collapse' . $this->accordionCount,
+			($args['title'] !== false) ? ' ' . $args['title'] : '',
+			\do_shortcode($content)
+		);
+	}
+
+	public function shortcodeAccordionGroup($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$this->accordionGroupCount = \uniqid();
+
+		$class = 'panel-group';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		return \sprintf(
+			'<div class="%1$s" id="%2$s"%3$s role="tablist" aria-multiselectable="true">%4$s</div>',
+			\esc_attr(\trim($class)),
+			'accordion-' . $this->accordionGroupCount,
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			\do_shortcode($content)
+		);
+	}
+
+	public function shortcodeAccordionItem($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$class = 'panel-collapse collapse';
+		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		return \sprintf(
+			'<div class="%1$s"%2$s id="%3$s" role="tabpanel" aria-labelledby="%5$s"><div class="panel-body">%5$s</div></div>',
+			\esc_attr(\trim($class)),
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			'collapse' . $this->accordionCount,
+			'heading' . $this->accordionCount,
+			\do_shortcode($content)
+		);
+	}
 
 	/**
 	 * Shortcode:
@@ -399,7 +481,7 @@ class Shortcodes {
 		);
 	} // END public function shortcodeButtonToolbar($atts, $content = null)
 
-	function shortcodeCaret($atts, $content = null) {
+	public function shortcodeCaret($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'xclass' => false,
@@ -437,7 +519,7 @@ class Shortcodes {
 	 * @param string $content
 	 * @return string
 	 */
-	function shortcodeCarousel($atts, $content = null) {
+	public function shortcodeCarousel($atts, $content = null) {
 		$this->carouselCount = \uniqid();
 
 		$this->carouselDefaultCount = 0;
@@ -518,7 +600,7 @@ class Shortcodes {
 	 * @param string $content
 	 * @return string
 	 */
-	function shortcodeCarouselItem($atts, $content = null) {
+	public function shortcodeCarouselItem($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'active'  => false,
@@ -552,6 +634,31 @@ class Shortcodes {
 			($dataProps !== null) ? ' ' . $dataProps : '',
 			\do_shortcode($content),
 			($args['caption'] !== false) ? '<div class="carousel-caption">' . \esc_html($args['caption']) . '</div>' : ''
+		);
+	}
+
+	public function shortcodeCode($atts, $content = null) {
+		$args = \shortcode_atts(
+			array(
+				'inline'  => false,
+				'scrollable' => false,
+				'xclass' => false,
+				'data' => false
+			), $atts
+		);
+
+		$class  = '';
+		$class .= ($args['scrollable'] !== false)  ? ' pre-scrollable' : '';
+		$class .= ($args['xclass'] !== false)   ? ' ' . $args['xclass'] : '';
+
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+
+		return \sprintf(
+			'<%1$s class="%2$s"%3$s>%4$s</%1$s>',
+			($args['inline'] !== false) ? 'code' : 'pre',
+			\esc_attr(\trim($class) ),
+			($dataProps !== null) ? ' ' . $dataProps : '',
+			\do_shortcode($content)
 		);
 	}
 } // END class Shortcodes

@@ -75,3 +75,19 @@ This has to be in one line, because of the way the WordPress editor is handling 
 ```
 
 This has to be in one line, because of the way the WordPress editor is handling line breaks.
+
+### Shortcode: ```[accordion]``` and ```[accordion-item]``` and ```[accordion-group]```
+
+![](images/accordion-shortcode.jpg)
+
+Accordion Group:
+```
+[accordion-group][accordion title="Accordion 1"][accordion-item]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat gravida turpis nec fringilla. Integer malesuada consectetur nibh. Donec at volutpat orci, vitae congue risus. Nullam aliquam dolor vel dolor blandit fringilla. Aliquam ultricies diam sed mauris feugiat rutrum nec et ante. Nam mattis quam eget aliquet commodo. Fusce feugiat urna tellus, vitae dictum velit eleifend a. Integer quis interdum nisl, vitae commodo tellus.[/accordion-item][/accordion][accordion title="Accordion 2"][accordion-item]Vivamus non metus vel risus commodo eleifend. In a fringilla metus. Praesent tempus velit ligula, non sollicitudin ligula dictum ac. Proin dignissim, risus at laoreet elementum, turpis leo sodales dui, vel pulvinar sem purus ac enim. Aliquam massa elit, pulvinar nec metus maximus, fringilla fermentum sem. Curabitur et lorem venenatis, volutpat lacus aliquet, volutpat eros. Integer malesuada, purus nec luctus suscipit, nulla lorem aliquet enim, ac condimentum orci mi a tellus. Cras a volutpat magna. Cras odio est, sollicitudin a velit sit amet, lobortis tempor velit. Etiam at diam nulla. Suspendisse potenti.[/accordion-item][/accordion][/accordion-group]
+```
+
+Single Accordion:
+```
+[accordion title="Accordion 3"][accordion-item]Vivamus non metus vel risus commodo eleifend. In a fringilla metus. Praesent tempus velit ligula, non sollicitudin ligula dictum ac. Proin dignissim, risus at laoreet elementum, turpis leo sodales dui, vel pulvinar sem purus ac enim. Aliquam massa elit, pulvinar nec metus maximus, fringilla fermentum sem. Curabitur et lorem venenatis, volutpat lacus aliquet, volutpat eros. Integer malesuada, purus nec luctus suscipit, nulla lorem aliquet enim, ac condimentum orci mi a tellus. Cras a volutpat magna. Cras odio est, sollicitudin a velit sit amet, lobortis tempor velit. Etiam at diam nulla. Suspendisse potenti.[/accordion-item][/accordion]
+```
+
+This has to be in one line, because of the way the WordPress editor is handling line breaks.
