@@ -104,7 +104,7 @@ This has to be in one line, because of the way the WordPress editor is handling 
 
 ### Shortcode: ```[progress]``` ```[progress-bar]```
 
-![](images/pregress-shortcode.jpg)
+![](images/progress-shortcode.jpg)
 
 ```
 [progress striped="true"][progress-bar percent="75" label="true"][/progress-bar][/progress]
