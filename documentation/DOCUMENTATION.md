@@ -24,7 +24,7 @@ Badge [badge]42[/badge]
 Badge [badge right="true"]42[/badge]
 ```
 
-### Shortcode: ```[breadcrumb]``` and ```[breadcrumb-item]```
+### Shortcode: ```[breadcrumb]``` ```[breadcrumb-item]```
 
 ![](images/breadcrumb-shortcode.jpg)
 
@@ -66,7 +66,7 @@ Examples Button Size:
 
 This has to be in one line, because of the way the WordPress editor is handling line breaks.
 
-### Shortcode: ```[carousel]``` and ```[carousel-item]```
+### Shortcode: ```[carousel]``` ```[carousel-item]```
 
 ![](images/carousel-shortcode.jpg)
 
@@ -76,7 +76,7 @@ This has to be in one line, because of the way the WordPress editor is handling 
 
 This has to be in one line, because of the way the WordPress editor is handling line breaks.
 
-### Shortcode: ```[accordion]``` and ```[accordion-item]``` and ```[accordion-group]```
+### Shortcode: ```[accordion]``` ```[accordion-item]``` ```[accordion-group]```
 
 ![](images/accordion-shortcode.jpg)
 
@@ -91,3 +91,31 @@ Single Accordion:
 ```
 
 This has to be in one line, because of the way the WordPress editor is handling line breaks.
+
+### Shortcode: ```[nav]``` ```[nav-item]``` and ```[dropdown]``` ```[dropdown-header]``` ```[dropdown-item]```
+
+![](images/navigation-shortcode.jpg)
+
+```
+[nav][nav-item link="https://test.de"]Nav-Item[/nav-item][nav-item dropdown="true" link="https://test.de"]Nav-Item Dropdown[dropdown][dropdown-header]Dropdown Header[/dropdown-header][dropdown-item link="https://test.de"]Dropdown Item[/dropdown-item][/dropdown][/nav-item][nav-item link="https://test.de" disabled="true"]Nav-Item Disabled[/nav-item][/nav]
+```
+
+This has to be in one line, because of the way the WordPress editor is handling line breaks.
+
+### Shortcode: ```[progress]``` ```[progress-bar]```
+
+![](images/pregress-shortcode.jpg)
+
+```
+[progress striped="true"][progress-bar percent="75" label="true"][/progress-bar][/progress]
+
+[progress][progress-bar percent="42" label="true" type="success"][/progress-bar][/progress]
+
+[progress striped="true" animated="true"][progress-bar percent="15" label="true" type="info"][/progress-bar][/progress]
+
+[progress][progress-bar percent="23" label="true" type="warning"][/progress-bar][/progress]
+
+[progress][progress-bar percent="81" label="true" type="danger"][/progress-bar][/progress]
+```
+
+The shortcode combination for a single progress bar has to be in one line, because of the way the WordPress editor is handling line breaks.

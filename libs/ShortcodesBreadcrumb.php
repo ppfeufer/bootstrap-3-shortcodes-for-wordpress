@@ -3,12 +3,14 @@
 
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
-class ShortcodesBreadcrumb {
+class ShortcodesBreadcrumb extends Shortcodes {
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->registerShortcodes();
+		parent::__construct();
+
+		$this->registerShortcodes($this->getShortcodeArray());
 	} // END public function __construct()
 
 	/**
@@ -24,17 +26,6 @@ class ShortcodesBreadcrumb {
 
 		return $shortcodes;
 	} // END private function getShortcodeArray()
-
-	/**
-	 * register all shortcodes
-	 */
-	public function registerShortcodes() {
-		$shortcodes = $this->getShortcodeArray();
-
-		foreach($shortcodes as $shortcode) {
-			\add_shortcode($shortcode, array($this, 'shortcode' . \WordPress\Plugin\BootstrapShortcodes\Helper\StringHelper::camelCase($shortcode, true)));
-		} // END foreach($shortcodes as $shortcode)
-	} // END public function registerShortcodes()
 
 	/**
 	 * Shortcode:

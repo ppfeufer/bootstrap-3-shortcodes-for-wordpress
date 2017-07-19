@@ -7,7 +7,7 @@ class Shortcodes {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->registerShortcodes();
+		$this->registerShortcodes($this->getShortcodeArray());
 	} // END public function __construct()
 
 	/**
@@ -27,9 +27,6 @@ class Shortcodes {
 //			'container',
 //			'container-fluid',
 //			'divider',
-//			'dropdown',
-//			'dropdown-header',
-//			'dropdown-item',
 //			'emphasis',
 //			'icon',
 //			'img',
@@ -46,13 +43,9 @@ class Shortcodes {
 //			'media-object',
 //			'modal',
 //			'modal-footer',
-//			'nav',
-//			'nav-item',
 //			'page-header',
 //			'panel',
 //			'popover',
-//			'progress',
-//			'progress-bar',
 //			'responsive',
 //			'row',
 //			'span',
@@ -71,8 +64,8 @@ class Shortcodes {
 	/**
 	 * register all shortcodes
 	 */
-	public function registerShortcodes() {
-		$shortcodes = $this->getShortcodeArray();
+	public function registerShortcodes($shortcodes) {
+//		$shortcodes = $this->getShortcodeArray();
 
 		foreach($shortcodes as $shortcode) {
 			\add_shortcode($shortcode, array($this, 'shortcode' . \WordPress\Plugin\BootstrapShortcodes\Helper\StringHelper::camelCase($shortcode, true)));

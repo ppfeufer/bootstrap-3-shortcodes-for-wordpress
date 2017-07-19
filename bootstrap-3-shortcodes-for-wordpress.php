@@ -45,6 +45,8 @@ class BootstrapShortcodes {
 		new Libs\ShortcodesBreadcrumb;
 		new Libs\ShortcodesButton;
 		new Libs\ShortcodesCarousel;
+		new Libs\ShortcodesNavigation;
+		new Libs\ShortcodesProgress;
 
 		// Enqueue scripts and styles
 		\add_action('wp_enqueue_scripts', array($this, 'enqueueJavaScript'), 99);

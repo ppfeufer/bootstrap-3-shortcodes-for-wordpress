@@ -2,9 +2,11 @@
 
 ## [In Development](https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress)
 ### Added
-- Shortcode ```[alert]```
-- Shortcode ```[badge]```
-- Shortcode ```[breadcrumb]``` and ```[breadcrumb-item]```
-- Shortcode ```[button]``` and ```[button-group]``` and ```[button-toolbar]```
-- Shortcode ```[carousel]``` and ```[carousel-item]```
-- Shortcode ```[accordion]``` and ```[accordion-item]``` and ```[accordion-group]```
+- shortcode ```[alert]```
+- shortcode ```[badge]```
+- shortcode ```[breadcrumb]``` ```[breadcrumb-item]```
+- shortcode ```[button]``` ```[button-group]``` ```[button-toolbar]```
+- shortcode ```[carousel]``` ```[carousel-item]```
+- shortcode ```[accordion]``` ```[accordion-item]``` ```[accordion-group]```
+- shortcode ```[nav]``` ```[nav-item]``` and ```[dropdown]``` ```[dropdown-header]``` ```[dropdown-item]```
+- shortcode ```[progress]``` ```[progress-bar]```
