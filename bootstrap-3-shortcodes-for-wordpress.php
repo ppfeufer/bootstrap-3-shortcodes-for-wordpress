@@ -39,8 +39,12 @@ class BootstrapShortcodes {
 		// Loading the libs and helper
 		$this->loadLibs();
 
-		// loading shortcodes
+		// starting the show
 		new Libs\Shortcodes;
+		new Libs\ShortcodesAccordion;
+		new Libs\ShortcodesBreadcrumb;
+		new Libs\ShortcodesButton;
+		new Libs\ShortcodesCarousel;
 
 		// Enqueue scripts and styles
 		\add_action('wp_enqueue_scripts', array($this, 'enqueueJavaScript'), 99);
