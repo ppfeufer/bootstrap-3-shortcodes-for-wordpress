@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress
  * Git URI: https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress
  * Description: Provides a way to implement the Bootstrap 3 stuff into WordPress via shortcodes. (Best with a theme running with <a href="http://getbootstrap.com/">Bootstrap</a>)
- * Version: 0.1-r20170717
+ * Version: 0.1-r20170719
  * Author: Peter Pfeufer
  * Author URI: http://ppfeufer.de
  * Text Domain: bootstrap-3-shortcodes-for-wordpress

@@ -25,15 +25,15 @@ class ShortcodeHelper {
 	 *		shortcodeCarousel
 	 *		shortcodeTabs
 	 *
-	 * @param string $str
+	 * @param string $string
 	 * @param type $att
 	 * @return type
 	 */
-	public static function getAttributeMap($str, $att = null) {
+	public static function getAttributeMap($string) {
 		$res = array();
 		$return = array();
 		$reg = \get_shortcode_regex();
-		\preg_match_all('~' . $reg . '~', $str, $matches);
+		\preg_match_all('~' . $reg . '~', $string, $matches);
 
 		foreach($matches[2] as $key => $name) {
 			$parsed = \shortcode_parse_atts($matches[3][$key]);

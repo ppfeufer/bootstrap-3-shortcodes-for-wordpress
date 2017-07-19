@@ -539,7 +539,7 @@ class Shortcodes {
 
 		$innerClass = 'carousel-inner';
 
-		$id = 'bootstrap-carousel-'. $this->carouselCount;
+		$elementId = 'bootstrap-carousel-'. $this->carouselCount;
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
 		$attributeMap = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::getAttributeMap($content);
@@ -560,7 +560,7 @@ class Shortcodes {
 				$indicators[] = \sprintf(
 					'<li class="%1$s" data-target="%2$s" data-slide-to="%3$s"></li>',
 					(!empty($slide['carousel-item']['active']) || ($this->carouselDefaultActive && $i == 0)) ? 'active' : '',
-					\esc_attr('#' . $id),
+					\esc_attr('#' . $elementId),
 					\esc_attr($i)
 				);
 
@@ -571,7 +571,7 @@ class Shortcodes {
 		return \sprintf(
 			'<div class="%1$s" id="%2$s" data-ride="carousel"%3$s%4$s%5$s%6$s>%7$s<div class="%8$s">%9$s</div>%10$s%11$s</div>',
 			\esc_attr($divClass),
-			\esc_attr($id),
+			\esc_attr($elementId),
 			($args['interval'] !== false) ? \sprintf(' data-interval="%1$d"', $args['interval']) : '',
 			($args['pause'] !== false) ? \sprintf(' data-pause="%1$s"', \esc_attr($args['pause'])) : '',
 			($args['wrap'] !== false) ? \sprintf(' data-wrap="%1$s"', \esc_attr($args['wrap'])) : '',
@@ -579,8 +579,8 @@ class Shortcodes {
 			(\count($indicators) > 0) ? '<ol class="carousel-indicators">' . \implode($indicators) . '</ol>' : '',
 			\esc_attr($innerClass),
 			\do_shortcode($content),
-			'<a class="left carousel-control" href="' . \esc_url('#' . $id) . '" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>',
-			'<a class="right carousel-control" href="' . \esc_url('#' . $id) . '" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
+			'<a class="left carousel-control" href="' . \esc_url('#' . $elementId) . '" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>',
+			'<a class="right carousel-control" href="' . \esc_url('#' . $elementId) . '" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>'
 		);
 	}
 
