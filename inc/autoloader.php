@@ -19,8 +19,11 @@ function autoload($className) {
 		// Read the current component of the file part.
 		$current = \str_ireplace('_', '-', $fileParts[$i]);
 
+		$namespace = '/' . $current . $namespace;
+
 		// If we're at the first entry, then we're at the filename.
 		if(\count($fileParts) - 1 === $i) {
+			$namespace = '';
 			$fileName = $current . '.php';
 
 			/* If 'interface' is contained in the parts of the file name, then
@@ -35,8 +38,6 @@ function autoload($className) {
 
 				$fileName = $interfaceName . '.php';
 			}
-		} else {
-			$namespace = '/' . $current . $namespace;
 		}
 
 		// Now build a path to the file using mapping to the file location.
