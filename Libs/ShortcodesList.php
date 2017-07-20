@@ -107,7 +107,7 @@ class ShortcodesList extends Shortcodes {
 		);
 	}
 
-	function bs_list_group_item_text( $atts, $content = null ) {
+	public function shortcodeListGroupItemText($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'xclass' => false,

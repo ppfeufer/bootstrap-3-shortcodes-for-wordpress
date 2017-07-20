@@ -29,7 +29,7 @@ class ShortcodesNavigation extends Shortcodes {
 		return $shortcodes;
 	} // END private function getShortcodeArray()
 
-	public function shortcodeNav( $atts, $content = null ) {
+	public function shortcodeNav($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'type' => false,
@@ -56,7 +56,7 @@ class ShortcodesNavigation extends Shortcodes {
 		);
 	}
 
-	public function shortcodeNavItem( $atts, $content = null ) {
+	public function shortcodeNavItem($atts, $content = null) {
 		$args = \shortcode_atts(
 			array(
 				'link' => false,
