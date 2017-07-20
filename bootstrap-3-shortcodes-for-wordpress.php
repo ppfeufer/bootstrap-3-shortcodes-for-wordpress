@@ -15,7 +15,7 @@
 namespace WordPress\Plugin\BootstrapShortcodes;
 
 // Include the autoloader so we can dynamically include the rest of the classes.
-require_once(\trailingslashit(\ dirname(__FILE__)) . 'inc/autoloader.php');
+require_once(\trailingslashit(\dirname(__FILE__)) . 'inc/autoloader.php');
 
 class BootstrapShortcodes {
 	private $textDomain = null;
@@ -52,6 +52,7 @@ class BootstrapShortcodes {
 		new Libs\ShortcodesList;
 		new Libs\ShortcodesNavigation;
 		new Libs\ShortcodesProgress;
+
 	}
 } // END class BootstrapShortcodes
 

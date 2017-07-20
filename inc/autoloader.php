@@ -1,14 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace WordPress\Plugin\BootstrapShortcodes;
 
-\spl_autoload_register('bootstrap_3_shortcodes_for_wordpress_autoload');
+\spl_autoload_register('\WordPress\Plugin\BootstrapShortcodes\autoload');
 
-function bootstrap_3_shortcodes_for_wordpress_autoload($className) {
+function autoload($className) {
 	// If the specified $className does not include our namespace, duck out.
 	if(\strpos($className, 'WordPress\Plugin\BootstrapShortcodes') === false) {
 		return;
@@ -16,14 +12,11 @@ function bootstrap_3_shortcodes_for_wordpress_autoload($className) {
 
 	// Split the class name into an array to read the namespace and class.
 	$fileParts = \explode('\\', $className);
-//	echo '<pre>' . print_r($fileParts, true) . '</pre>';
 
 	// Do a reverse loop through $fileParts to build the path to the file.
 	$namespace = '';
 	for($i = \count($fileParts) - 1; $i > 0; $i--) {
 		// Read the current component of the file part.
-//		$current = \strtolower($fileParts[$i]);
-//		$current = \str_ireplace('_', '-', $current);
 		$current = \str_ireplace('_', '-', $fileParts[$i]);
 
 		// If we're at the first entry, then we're at the filename.
@@ -45,6 +38,7 @@ function bootstrap_3_shortcodes_for_wordpress_autoload($className) {
 		} else {
 			$namespace = '/' . $current . $namespace;
 		}
+
 		// Now build a path to the file using mapping to the file location.
 		$filepath = \trailingslashit(\dirname(\dirname(__FILE__)) . $namespace);
 		$filepath .= $fileName;
@@ -52,10 +46,6 @@ function bootstrap_3_shortcodes_for_wordpress_autoload($className) {
 		// If the file exists in the specified path, then include it.
 		if(\file_exists($filepath)) {
 			include_once($filepath);
-		} else {
-//			\wp_die(
-//				\esc_html("The file attempting to be loaded at $current does not exist.")
-//			);
 		}
 	}
 }
