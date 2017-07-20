@@ -1,6 +1,5 @@
 <?php
 
-
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
 class ShortcodesBreadcrumb extends Shortcodes {

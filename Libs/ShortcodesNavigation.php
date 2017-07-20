@@ -1,6 +1,5 @@
 <?php
 
-
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
 class ShortcodesNavigation extends Shortcodes {
@@ -41,7 +40,7 @@ class ShortcodesNavigation extends Shortcodes {
 			), $atts
 		);
 
-		$class  = 'nav';
+		$class = 'nav';
 		$class .= ($args['type'] !== false) ? ' nav-' . $args['type'] : ' nav-tabs';
 		$class .= ($args['stacked'] !== false) ? ' nav-stacked' : '';
 		$class .= ($args['justified'] !== false) ? ' nav-justified' : '';
@@ -69,7 +68,7 @@ class ShortcodesNavigation extends Shortcodes {
 			), $atts
 		);
 
-		$liClasses  = '';
+		$liClasses = '';
 		$liClasses .= ($args['dropdown'] !== false) ? 'dropdown' : '';
 		$liClasses .= ($args['active'] !== false)   ? ' active' : '';
 		$liClasses .= ($args['disabled'] !== false) ? ' disabled' : '';
@@ -119,7 +118,7 @@ class ShortcodesNavigation extends Shortcodes {
 			), $atts
 		);
 
-		$class  = 'dropdown-menu';
+		$class = 'dropdown-menu';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
@@ -154,7 +153,7 @@ class ShortcodesNavigation extends Shortcodes {
 			), $atts
 		);
 
-		$class  = 'dropdown-header';
+		$class = 'dropdown-header';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
@@ -193,7 +192,7 @@ class ShortcodesNavigation extends Shortcodes {
 			), $atts
 		);
 
-		$liClass  = '';
+		$liClass = '';
 		$liClass .= ($args['disabled'] !== false) ? ' disabled' : '';
 
 		$anchorClass  = '';

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
 /**
@@ -42,7 +41,7 @@ class ShortcodesProgress extends Shortcodes {
 			), $atts
 		);
 
-		$class  = 'progress';
+		$class = 'progress';
 		$class .= ($args['striped'] !== false)  ? ' progress-striped' : '';
 		$class .= ($args['animated'] !== false) ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
@@ -68,7 +67,7 @@ class ShortcodesProgress extends Shortcodes {
 			), $atts
 		);
 
-		$class  = 'progress-bar';
+		$class = 'progress-bar';
 		$class .= ($args['type'] !== false)   ? ' progress-bar-' . $args['type'] : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 

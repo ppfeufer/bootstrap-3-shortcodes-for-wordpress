@@ -1,6 +1,5 @@
 <?php
 
-
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
 class ShortcodesButton extends Shortcodes {
@@ -120,7 +119,7 @@ class ShortcodesButton extends Shortcodes {
 			), $atts
 		);
 
-		$class  = 'btn-group';
+		$class = 'btn-group';
 		$class .= ($args['size'] !== false) ? ' btn-group-' . $args['size'] : '';
 		$class .= ($args['vertical'] !== false) ? ' btn-group-vertical' : '';
 		$class .= ($args['justified'] !== false) ? ' btn-group-justified' : '';
@@ -159,7 +158,7 @@ class ShortcodesButton extends Shortcodes {
 			), $atts
 		);
 
-		$class  = 'btn-toolbar';
+		$class = 'btn-toolbar';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);

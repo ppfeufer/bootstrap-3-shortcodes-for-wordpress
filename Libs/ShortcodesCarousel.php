@@ -1,6 +1,5 @@
 <?php
 
-
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
 class ShortcodesCarousel extends Shortcodes {
@@ -63,7 +62,7 @@ class ShortcodesCarousel extends Shortcodes {
 			), $atts
 		);
 
-		$divClass  = 'carousel slide';
+		$divClass = 'carousel slide';
 		$divClass .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$innerClass = 'carousel-inner';
@@ -145,7 +144,7 @@ class ShortcodesCarousel extends Shortcodes {
 
 		$this->carouselDefaultCount++;
 
-		$class  = 'item';
+		$class = 'item';
 		$class .= ($args['active'] !== false) ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 

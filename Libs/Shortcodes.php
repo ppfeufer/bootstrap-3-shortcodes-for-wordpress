@@ -34,10 +34,6 @@ class Shortcodes {
 //			'jumbotron',
 //			'label',
 //			'lead',
-//			'list-group',
-//			'list-group-item',
-//			'list-group-item-heading',
-//			'list-group-item-text',
 //			'media',
 //			'media-body',
 //			'media-object',
@@ -162,7 +158,7 @@ class Shortcodes {
 			), $atts
 		);
 
-		$class  = 'caret';
+		$class = 'caret';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
@@ -185,7 +181,7 @@ class Shortcodes {
 			), $atts
 		);
 
-		$class  = '';
+		$class = '';
 		$class .= ($args['scrollable'] !== false)  ? ' pre-scrollable' : '';
 		$class .= ($args['xclass'] !== false)   ? ' ' . $args['xclass'] : '';
 
