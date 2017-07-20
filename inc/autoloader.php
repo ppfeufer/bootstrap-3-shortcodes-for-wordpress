@@ -33,8 +33,8 @@ function autoload($className) {
 			 */
 			if(\strpos(\strtolower($fileParts[\count($fileParts) - 1]), 'interface')) {
 				// Grab the name of the interface from its qualified name.
-				$interfaceName = \explode('_', $fileParts[\count($fileParts) - 1]);
-				$interfaceName = $interfaceName[0];
+				$interfaceNameParts = \explode('_', $fileParts[\count($fileParts) - 1]);
+				$interfaceName = $interfaceNameParts[0];
 
 				$fileName = $interfaceName . '.php';
 			}
