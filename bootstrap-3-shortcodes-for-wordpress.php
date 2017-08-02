@@ -13,6 +13,7 @@
  */
 
 namespace WordPress\Plugin\BootstrapShortcodes;
+const WP_GITHUB_FORCE_UPDATE = true;
 
 // Include the autoloader so we can dynamically include the rest of the classes.
 require_once(\trailingslashit(\dirname(__FILE__)) . 'inc/autoloader.php');
@@ -40,19 +41,6 @@ class BootstrapShortcodes {
 		$javascriptLoader = new ResourceLoader\JavascriptLoader;
 		$javascriptLoader->init();
 
-		$this->initShortcodes();
-	} // END public function init()
-
-	private function initShortcodes() {
-		new Libs\Shortcodes;
-		new Libs\ShortcodesAccordion;
-		new Libs\ShortcodesBreadcrumb;
-		new Libs\ShortcodesButton;
-		new Libs\ShortcodesCarousel;
-		new Libs\ShortcodesList;
-		new Libs\ShortcodesNavigation;
-		new Libs\ShortcodesProgress;
-
 		if(\is_admin()) {
 			/**
 			 * Check Github for updates
@@ -73,6 +61,19 @@ class BootstrapShortcodes {
 
 			new Libs\GithubUpdater($githubConfig);
 		}
+
+		$this->initShortcodes();
+	} // END public function init()
+
+	private function initShortcodes() {
+		new Libs\Shortcodes;
+		new Libs\ShortcodesAccordion;
+		new Libs\ShortcodesBreadcrumb;
+		new Libs\ShortcodesButton;
+		new Libs\ShortcodesCarousel;
+		new Libs\ShortcodesList;
+		new Libs\ShortcodesNavigation;
+		new Libs\ShortcodesProgress;
 	}
 } // END class BootstrapShortcodes
 
