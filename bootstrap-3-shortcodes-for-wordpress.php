@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress
  * Git URI: https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress
  * Description: Provides a way to implement the Bootstrap 3 stuff into WordPress via shortcodes. (Best with a theme running with <a href="http://getbootstrap.com/">Bootstrap</a>)
- * Version: 0.1-r20170720
+ * Version: 0.1-r20170802
  * Author: Peter Pfeufer
  * Author URI: http://ppfeufer.de
  * Text Domain: bootstrap-3-shortcodes-for-wordpress
@@ -53,6 +53,26 @@ class BootstrapShortcodes {
 		new Libs\ShortcodesNavigation;
 		new Libs\ShortcodesProgress;
 
+		if(\is_admin()) {
+			/**
+			 * Check Github for updates
+			 */
+			$githubConfig = array(
+				'slug' => \plugin_basename(__FILE__),
+				'proper_folder_name' => 'bootstrap-3-shortcodes-for-wordpress',
+				'api_url' => 'https://api.github.com/repos/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
+				'raw_url' => 'https://raw.github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress/master',
+				'github_url' => 'https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
+				'zip_url' => 'https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress/archive/master.zip',
+				'sslverify' => true,
+				'requires' => '4.7',
+				'tested' => '4.8',
+				'readme' => 'README.md',
+				'access_token' => '',
+			);
+
+			new Libs\GithubUpdater($githubConfig);
+		}
 	}
 } // END class BootstrapShortcodes
 
