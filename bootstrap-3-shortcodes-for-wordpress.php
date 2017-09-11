@@ -47,7 +47,7 @@ class BootstrapShortcodes {
 			 */
 			$githubConfig = array(
 				'slug' => \plugin_basename(__FILE__),
-				'proper_folder_name' => 'bootstrap-3-shortcodes-for-wordpress',
+				'proper_folder_name' => \dirname(\plugin_basename(__FILE__)),
 				'api_url' => 'https://api.github.com/repos/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
 				'raw_url' => 'https://raw.github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress/master',
 				'github_url' => 'https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
