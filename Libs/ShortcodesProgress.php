@@ -56,7 +56,7 @@ class ShortcodesProgress extends Shortcodes {
 		);
 	}
 
-	public function shortcodeProgressBar($atts, $content = null) {
+	public function shortcodeProgressBar($atts) {
 		$args = \shortcode_atts(
 			array(
 				'type' => false,
