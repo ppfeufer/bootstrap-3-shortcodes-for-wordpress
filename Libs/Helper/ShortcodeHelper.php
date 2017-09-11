@@ -1,9 +1,9 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Helper;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Helper;
 
-class ShortcodeHelper {
-	public static function parseDataAttributes($data) {
+class ShortcodeHelper extends \WordPress\Plugin\BootstrapShortcodes\Libs\Singletons\AbstractSingleton {
+	public function parseDataAttributes($data) {
 		$dataProps = null;
 
 		if(!empty($data)) {
@@ -29,7 +29,7 @@ class ShortcodeHelper {
 	 * @param type $att
 	 * @return type
 	 */
-	public static function getAttributeMap($string) {
+	public function getAttributeMap($string) {
 		$res = array();
 		$return = array();
 		$reg = \get_shortcode_regex();

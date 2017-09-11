@@ -45,7 +45,7 @@ class ShortcodesList extends Shortcodes {
 		$class = 'list-group';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<%1$s class="%2$s"%3$s>%4$s</%1$s>',
@@ -73,7 +73,7 @@ class ShortcodesList extends Shortcodes {
 		$class .= ($args['active'] !== false)   ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<%1$s %2$s %3$s class="%4$s"%5$s>%6$s</%1$s>',
@@ -97,7 +97,7 @@ class ShortcodesList extends Shortcodes {
 		$class = 'list-group-item-heading';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<h4 class="%s"%s>%s</h4>',
@@ -118,7 +118,7 @@ class ShortcodesList extends Shortcodes {
 		$class = 'list-group-item-text';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<p class="%s"%s>%s</p>',

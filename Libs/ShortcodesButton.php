@@ -76,7 +76,7 @@ class ShortcodesButton extends Shortcodes {
 		$class .= ($args['active'] !== false) ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<a href="%1$s" class="%2$s"%3$s%4$s%5$s>%6$s</a>',
@@ -126,7 +126,7 @@ class ShortcodesButton extends Shortcodes {
 		$class .= ($args['dropup'] !== false) ? ' dropup' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<div class="%1$s"%2$s>%3$s</div>',
@@ -161,7 +161,7 @@ class ShortcodesButton extends Shortcodes {
 		$class = 'btn-toolbar';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return sprintf(
 			'<div class="%1$s"%2$s>%3$s</div>',

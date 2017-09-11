@@ -46,7 +46,7 @@ class ShortcodesProgress extends Shortcodes {
 		$class .= ($args['animated'] !== false) ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return sprintf(
 			'<div class="%s"%s>%s</div>',
@@ -71,7 +71,7 @@ class ShortcodesProgress extends Shortcodes {
 		$class .= ($args['type'] !== false)   ? ' progress-bar-' . $args['type'] : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return sprintf(
 			'<div class="%s" role="progressbar" %s%s>%s</div>',

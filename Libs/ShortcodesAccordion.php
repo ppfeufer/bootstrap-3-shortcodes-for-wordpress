@@ -44,7 +44,7 @@ class ShortcodesAccordion extends Shortcodes {
 		$class = 'panel panel-default bootstrap-accordion';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<div class="%1$s"%2$s><div class="panel-heading" role="tab" id="%3$s"><h4 class="panel-title"><a class="bootstrap-accordion-title collapsed" role="button" data-toggle="collapse" data-parent="%4$s" href="%5$s" aria-expanded="false" aria-controls="%6$s">%7$s<span class="caret collapse-toggle" data-toggle="collapse"><i></i></span></a></h4></div>%8$s</div>',
@@ -72,7 +72,7 @@ class ShortcodesAccordion extends Shortcodes {
 		$class = 'panel-group';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<div class="%1$s" id="%2$s"%3$s role="tablist" aria-multiselectable="true">%4$s</div>',
@@ -94,7 +94,7 @@ class ShortcodesAccordion extends Shortcodes {
 		$class = 'panel-collapse collapse';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<div class="%1$s"%2$s id="%3$s" role="tabpanel" aria-labelledby="%5$s"><div class="panel-body">%5$s</div></div>',

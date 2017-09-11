@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Bootstrap 3 Shortcodes for WordPress
  * Plugin URI: https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress
- * Git URI: https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress
+ * GitHub Plugin URI: https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress
  * Description: Provides a way to implement the Bootstrap 3 stuff into WordPress via shortcodes. (Best with a theme running with <a href="http://getbootstrap.com/">Bootstrap</a>)
  * Version: 0.1-r20170802
  * Author: Peter Pfeufer
@@ -34,11 +34,11 @@ class BootstrapShortcodes {
 
 	public function init() {
 		// Loaduing CSS
-		$cssLoader = new ResourceLoader\CssLoader;
+		$cssLoader = new Libs\ResourceLoader\CssLoader;
 		$cssLoader->init();
 
 		// Loading JavaScript
-		$javascriptLoader = new ResourceLoader\JavascriptLoader;
+		$javascriptLoader = new Libs\ResourceLoader\JavascriptLoader;
 		$javascriptLoader->init();
 
 		if(\is_admin()) {
