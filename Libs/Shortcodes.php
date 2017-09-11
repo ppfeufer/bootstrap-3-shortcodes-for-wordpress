@@ -5,10 +5,36 @@ namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 class Shortcodes {
 	/**
 	 * Constructor
+	 *
+	 * @param boolean $addFilter whether to add the filters or not.
+	 *							 It's only needed when initializing this class,
+	 *							 not the other shortcode classes that extending
+	 *							 this one
 	 */
-	public function __construct() {
+	public function __construct($addFilter = false) {
 		$this->registerShortcodes($this->getShortcodeArray());
+
+		if($addFilter === true) {
+			$this->addFilter();
+		}
 	} // END public function __construct()
+
+	public function addFilter() {
+		\add_filter('the_content', [$this, 'filterFixLinebreaks']);
+	}
+
+	public function filterFixLinebreaks($content) {
+		$toReplace = array (
+			'<p>[' => '[',
+			']</p>' => ']',
+			']<br />' => ']',
+			']<br>' => ']'
+		);
+
+		$content = \strtr($content, $toReplace);
+
+		return $content;
+	}
 
 	/**
 	 * getting the supported shortcodes

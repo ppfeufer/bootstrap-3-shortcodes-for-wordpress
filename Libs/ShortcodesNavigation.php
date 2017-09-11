@@ -6,8 +6,8 @@ class ShortcodesNavigation extends Shortcodes {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
-		parent::__construct();
+	public function __construct($addFilter = false) {
+		parent::__construct($addFilter);
 
 		$this->registerShortcodes($this->getShortcodeArray());
 	} // END public function __construct()

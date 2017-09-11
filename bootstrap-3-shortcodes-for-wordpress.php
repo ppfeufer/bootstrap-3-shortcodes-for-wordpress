@@ -66,7 +66,7 @@ class BootstrapShortcodes {
 	} // END public function init()
 
 	private function initShortcodes() {
-		new Libs\Shortcodes;
+		new Libs\Shortcodes(true);
 		new Libs\ShortcodesAccordion;
 		new Libs\ShortcodesBreadcrumb;
 		new Libs\ShortcodesButton;
