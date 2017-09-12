@@ -1,5 +1,5 @@
 <?php
-namespace WordPress\Plugin\BootstrapShortcodes\Interfaces;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Interfaces;
 
 /**
  * Defines a common set of functions that any class responsible for loading

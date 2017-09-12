@@ -6,8 +6,8 @@ class ShortcodesBreadcrumb extends Shortcodes {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
-		parent::__construct();
+	public function __construct($addFilter = false) {
+		parent::__construct($addFilter);
 
 		$this->registerShortcodes($this->getShortcodeArray());
 	} // END public function __construct()
@@ -52,7 +52,7 @@ class ShortcodesBreadcrumb extends Shortcodes {
 		$class = 'breadcrumb';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<ol class="%1$s"%2$s>%3$s</ol>',
@@ -93,7 +93,7 @@ class ShortcodesBreadcrumb extends Shortcodes {
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$active = ($args['active'] !== false) ? ' class="active"' : '';
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		$link = ($args['link']) ? \sprintf('<a href="%1$s" class="%2$s"%3$s>%4$s</a>',
 			\esc_url($args['link']),

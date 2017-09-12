@@ -5,10 +5,36 @@ namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 class Shortcodes {
 	/**
 	 * Constructor
+	 *
+	 * @param boolean $addFilter whether to add the filters or not.
+	 *							 It's only needed when initializing this class,
+	 *							 not the other shortcode classes that extending
+	 *							 this one
 	 */
-	public function __construct() {
+	public function __construct($addFilter = false) {
 		$this->registerShortcodes($this->getShortcodeArray());
+
+		if($addFilter === true) {
+			$this->addFilter();
+		}
 	} // END public function __construct()
+
+	public function addFilter() {
+		\add_filter('the_content', [$this, 'filterFixLinebreaks']);
+	}
+
+	public function filterFixLinebreaks($content) {
+		$toReplace = array (
+			'<p>[' => '[',
+			']</p>' => ']',
+			']<br />' => ']',
+			']<br>' => ']'
+		);
+
+		$content = \strtr($content, $toReplace);
+
+		return $content;
+	}
 
 	/**
 	 * getting the supported shortcodes
@@ -64,7 +90,7 @@ class Shortcodes {
 //		$shortcodes = $this->getShortcodeArray();
 
 		foreach($shortcodes as $shortcode) {
-			\add_shortcode($shortcode, array($this, 'shortcode' . \WordPress\Plugin\BootstrapShortcodes\Helper\StringHelper::camelCase($shortcode, true)));
+			\add_shortcode($shortcode, array($this, 'shortcode' . \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\StringHelper::getInstance()->camelCase($shortcode, true)));
 		} // END foreach($shortcodes as $shortcode)
 	} // END public function registerShortcodes()
 
@@ -101,7 +127,7 @@ class Shortcodes {
 
 		$dismissableButton = ($args['dismissable']) ? '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<div class="%1$s"%2$s>%3$s%4$s</div>',
@@ -140,7 +166,7 @@ class Shortcodes {
 		$class .= ($args['right'] !== false) ? ' pull-right' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<span class="%1$s"%2$s>%3$s</span>',
@@ -161,7 +187,7 @@ class Shortcodes {
 		$class = 'caret';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return sprintf(
 			'<span class="%1$s"%2$s>%3$s</span>',
@@ -185,7 +211,7 @@ class Shortcodes {
 		$class .= ($args['scrollable'] !== false)  ? ' pre-scrollable' : '';
 		$class .= ($args['xclass'] !== false)   ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<%1$s class="%2$s"%3$s>%4$s</%1$s>',

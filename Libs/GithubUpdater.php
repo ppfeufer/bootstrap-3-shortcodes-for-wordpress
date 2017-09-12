@@ -105,7 +105,7 @@ class GithubUpdater {
 
 		$this->missingConfig = array();
 
-		$required_config_params = array(
+		$requiredConfigParams = array(
 			'api_url',
 			'raw_url',
 			'github_url',
@@ -115,7 +115,7 @@ class GithubUpdater {
 			'readme',
 		);
 
-		foreach($required_config_params as $required_param) {
+		foreach($requiredConfigParams as $required_param) {
 			if(empty($this->config[$required_param])) {
 				$this->missingConfig[] = $required_param;
 			}
@@ -428,12 +428,19 @@ class GithubUpdater {
 	 *
 	 * @since 1.0
 	 * @param boolean $true       always true
-	 * @param mixed   $hook_extra not used
+	 * @param mixed   $hookExtra  not used
 	 * @param array   $result     the result of the move
 	 * @return array $result the result of the move
 	 */
-	public function upgraderPostInstall($true, $hook_extra, $result) {
+	public function upgraderPostInstall($true, $hookExtra, $result) {
 		global $wp_filesystem;
+
+		/**
+		 * We don't use them, but WordPress wants to have them here ...
+		 * So let's drop them :-P
+		 */
+		unset($true);
+		unset($hookExtra);
 
 		// Move & Activate
 		$proper_destination = \WP_PLUGIN_DIR . '/' . $this->config['proper_folder_name'];

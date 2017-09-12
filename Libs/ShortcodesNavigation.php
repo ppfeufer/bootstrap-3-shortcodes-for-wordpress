@@ -6,8 +6,8 @@ class ShortcodesNavigation extends Shortcodes {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
-		parent::__construct();
+	public function __construct($addFilter = false) {
+		parent::__construct($addFilter);
 
 		$this->registerShortcodes($this->getShortcodeArray());
 	} // END public function __construct()
@@ -46,7 +46,7 @@ class ShortcodesNavigation extends Shortcodes {
 		$class .= ($args['justified'] !== false) ? ' nav-justified' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<ul class="%s"%s>%s</ul>',
@@ -77,7 +77,7 @@ class ShortcodesNavigation extends Shortcodes {
 		$anchorClasses .= ($args['dropdown'] !== false) ? ' dropdown-toggle' : '';
 		$anchorClasses .= ($args['xclass'] !== false)   ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		# Wrong idea I guess ....
 		#$pattern = ( $dropdown ) ? '<li%1$s><a href="%2$s"%3$s%4$s%5$s></a>%6$s</li>' : '<li%1$s><a href="%2$s"%3$s%4$s%5$s>%6$s</a></li>';
@@ -121,7 +121,7 @@ class ShortcodesNavigation extends Shortcodes {
 		$class = 'dropdown-menu';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<ul role="menu" class="%s"%s>%s</ul>',
@@ -156,7 +156,7 @@ class ShortcodesNavigation extends Shortcodes {
 		$class = 'dropdown-header';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<li class="%s"%s>%s</li>',
@@ -198,7 +198,7 @@ class ShortcodesNavigation extends Shortcodes {
 		$anchorClass  = '';
 		$anchorClass .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = $dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		return \sprintf(
 			'<li role="presentation" class="%s"><a role="menuitem" href="%s" class="%s"%s>%s</a></li>',

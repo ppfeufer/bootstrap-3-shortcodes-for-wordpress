@@ -10,8 +10,8 @@ class ShortcodesCarousel extends Shortcodes {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
-		parent::__construct();
+	public function __construct($addFilter = false) {
+		parent::__construct($addFilter);
 
 		$this->registerShortcodes($this->getShortcodeArray());
 	} // END public function __construct()
@@ -69,8 +69,8 @@ class ShortcodesCarousel extends Shortcodes {
 
 		$elementId = 'bootstrap-carousel-'. $this->carouselCount;
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
-		$attributeMap = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::getAttributeMap($content);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
+		$attributeMap = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->getAttributeMap($content);
 
 		// Extract the slide titles for use in the carousel widget.
 		if($attributeMap) {
@@ -148,7 +148,7 @@ class ShortcodesCarousel extends Shortcodes {
 		$class .= ($args['active'] !== false) ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Helper\ShortcodeHelper::parseDataAttributes($args['data']);
+		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
 		//$content = preg_replace('/class=".*?"/', '', $content);
 		$content = \preg_replace('/alignnone/', '', $content);
