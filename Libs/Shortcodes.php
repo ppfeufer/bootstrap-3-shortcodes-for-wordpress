@@ -2,22 +2,17 @@
 
 namespace WordPress\Plugin\BootstrapShortcodes\Libs;
 
-class Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interfaces\ShortcodeInterface {
+class Shortcodes {
 	/**
 	 * Constructor
 	 *
-	 * @param boolean $init initialize the main class
+	 * @param boolean $addFilter Adding the filters for main class
 	 */
-	public function __construct($init = false) {
-		if($init === true) {
-			$this->init();
+	public function __construct($addFilter = false) {
+		if($addFilter === true) {
+			$this->addFilter();
 		}
 	} // END public function __construct()
-
-	public function init() {
-//		$this->registerShortcodes($this->getShortcodeArray());
-		$this->addFilter();
-	}
 
 	public function addFilter() {
 		\add_filter('the_content', [$this, 'filterFixLinebreaks']);
@@ -41,8 +36,8 @@ class Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interface
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	public function getShortcodeArray() {
-		$shortcodes = array(
+//	public function getShortcodeArray() {
+//		$shortcodes = array(
 //			'collapse',
 //			'collapsibles',
 //			'column',
@@ -74,10 +69,10 @@ class Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interface
 //			'thumbnail',
 //			'tooltip',
 //			'well',
-		);
-
-		return $shortcodes;
-	} // END private function getShortcodeArray()
+//		);
+//
+//		return $shortcodes;
+//	} // END private function getShortcodeArray()
 
 	/**
 	 * register all shortcodes

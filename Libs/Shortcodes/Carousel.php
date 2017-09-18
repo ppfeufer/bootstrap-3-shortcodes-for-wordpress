@@ -2,7 +2,7 @@
 
 namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class Carousel extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
+class Carousel extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interfaces\ShortcodeInterface {
 	private $carouselCount = null;
 	private $carouselDefaultCount = null;
 	private $carouselDefaultActive = true;

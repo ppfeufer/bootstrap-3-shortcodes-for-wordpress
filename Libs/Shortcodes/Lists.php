@@ -7,7 +7,7 @@ namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
  *
  * @see http://getbootstrap.com/components/#progress
  */
-class Lists extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
+class Lists extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interfaces\ShortcodeInterface {
 	/**
 	 * Constructor
 	 */

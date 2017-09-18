@@ -2,7 +2,7 @@
 
 namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class Code extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
+class Code extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interfaces\ShortcodeInterface {
 	/**
 	 * Constructor
 	 */

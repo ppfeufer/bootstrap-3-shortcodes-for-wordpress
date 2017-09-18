@@ -2,7 +2,7 @@
 
 namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class Accordion extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
+class Accordion extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interfaces\ShortcodeInterface {
 	private $accordionCount = null;
 	private $accordionGroupCount = null;
 
