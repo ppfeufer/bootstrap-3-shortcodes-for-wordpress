@@ -1,13 +1,13 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
 /**
  * Bootstrap Progress Bars
  *
  * @see http://getbootstrap.com/components/#progress
  */
-class ShortcodesList extends Shortcodes {
+class Lists extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
 	/**
 	 * Constructor
 	 */
@@ -22,7 +22,7 @@ class ShortcodesList extends Shortcodes {
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	private function getShortcodeArray() {
+	public function getShortcodeArray() {
 		$shortcodes = array(
 			'list-group',
 			'list-group-item',
@@ -70,7 +70,7 @@ class ShortcodesList extends Shortcodes {
 
 		$class = 'list-group-item';
 		$class .= ($args['type'] !== false) ? ' list-group-item-' . $args['type'] : '';
-		$class .= ($args['active'] !== false)   ? ' active' : '';
+		$class .= ($args['active'] !== false) ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
@@ -127,4 +127,4 @@ class ShortcodesList extends Shortcodes {
 			\do_shortcode($content)
 		);
 	}
-} // END class
+}

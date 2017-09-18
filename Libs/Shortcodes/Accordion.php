@@ -1,8 +1,8 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class ShortcodesAccordion extends Shortcodes {
+class Accordion extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
 	private $accordionCount = null;
 	private $accordionGroupCount = null;
 
@@ -20,7 +20,7 @@ class ShortcodesAccordion extends Shortcodes {
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	private function getShortcodeArray() {
+	public function getShortcodeArray() {
 		$shortcodes = array(
 			'accordion',
 			'accordion-group',

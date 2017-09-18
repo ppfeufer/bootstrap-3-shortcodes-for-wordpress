@@ -1,8 +1,8 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class ShortcodesNavigation extends Shortcodes {
+class Navigation extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
 	/**
 	 * Constructor
 	 */
@@ -17,7 +17,7 @@ class ShortcodesNavigation extends Shortcodes {
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	private function getShortcodeArray() {
+	public function getShortcodeArray() {
 		$shortcodes = array(
 			'nav',
 			'nav-item',
@@ -70,12 +70,12 @@ class ShortcodesNavigation extends Shortcodes {
 
 		$liClasses = '';
 		$liClasses .= ($args['dropdown'] !== false) ? 'dropdown' : '';
-		$liClasses .= ($args['active'] !== false)   ? ' active' : '';
+		$liClasses .= ($args['active'] !== false) ? ' active' : '';
 		$liClasses .= ($args['disabled'] !== false) ? ' disabled' : '';
 
 		$anchorClasses  = '';
 		$anchorClasses .= ($args['dropdown'] !== false) ? ' dropdown-toggle' : '';
-		$anchorClasses .= ($args['xclass'] !== false)   ? ' ' . $args['xclass'] : '';
+		$anchorClasses .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
@@ -209,4 +209,4 @@ class ShortcodesNavigation extends Shortcodes {
 			\do_shortcode($content)
 		);
 	} // END public function shortcodeDropdownItem($atts, $content = null)
-} // END class
+}

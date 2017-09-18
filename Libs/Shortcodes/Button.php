@@ -1,8 +1,8 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class ShortcodesButton extends Shortcodes {
+class Button extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
 	/**
 	 * Constructor
 	 */
@@ -17,7 +17,7 @@ class ShortcodesButton extends Shortcodes {
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	private function getShortcodeArray() {
+	public function getShortcodeArray() {
 		$shortcodes = array(
 			'button',
 			'button-group',

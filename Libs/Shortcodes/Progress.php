@@ -1,13 +1,13 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
 /**
  * Bootstrap Progress Bars
  *
  * @see http://getbootstrap.com/components/#progress
  */
-class ShortcodesProgress extends Shortcodes {
+class Progress extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
 	/**
 	 * Constructor
 	 */
@@ -22,7 +22,7 @@ class ShortcodesProgress extends Shortcodes {
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	private function getShortcodeArray() {
+	public function getShortcodeArray() {
 		$shortcodes = array(
 			'progress',
 			'progress-bar'
@@ -42,7 +42,7 @@ class ShortcodesProgress extends Shortcodes {
 		);
 
 		$class = 'progress';
-		$class .= ($args['striped'] !== false)  ? ' progress-striped' : '';
+		$class .= ($args['striped'] !== false) ? ' progress-striped' : '';
 		$class .= ($args['animated'] !== false) ? ' active' : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
@@ -68,7 +68,7 @@ class ShortcodesProgress extends Shortcodes {
 		);
 
 		$class = 'progress-bar';
-		$class .= ($args['type'] !== false)   ? ' progress-bar-' . $args['type'] : '';
+		$class .= ($args['type'] !== false) ? ' progress-bar-' . $args['type'] : '';
 		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
 		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
@@ -81,4 +81,4 @@ class ShortcodesProgress extends Shortcodes {
 			($args['percent'] !== false) ? \sprintf('<span%s>%s</span>', (!$args['label']) ? ' class="sr-only"' : '', (int) $args['percent'] . '% ' . \__('Complete', 'bootstrap-3-shortcodes-for-wordpress')) : ''
 		);
 	}
-} // END class
+}

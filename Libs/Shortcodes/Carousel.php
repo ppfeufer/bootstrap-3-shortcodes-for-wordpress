@@ -1,8 +1,8 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class ShortcodesCarousel extends Shortcodes {
+class Carousel extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
 	private $carouselCount = null;
 	private $carouselDefaultCount = null;
 	private $carouselDefaultActive = true;
@@ -21,7 +21,7 @@ class ShortcodesCarousel extends Shortcodes {
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	private function getShortcodeArray() {
+	public function getShortcodeArray() {
 		$shortcodes = array(
 			'carousel',
 			'carousel-item'

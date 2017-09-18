@@ -1,8 +1,8 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs;
+namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
 
-class ShortcodesBreadcrumb extends Shortcodes {
+class Breadcrumb extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes {
 	/**
 	 * Constructor
 	 */
@@ -17,7 +17,7 @@ class ShortcodesBreadcrumb extends Shortcodes {
 	 *
 	 * @return array Array with all supported shortcodes
 	 */
-	private function getShortcodeArray() {
+	public function getShortcodeArray() {
 		$shortcodes = array(
 			'breadcrumb',
 			'breadcrumb-item'

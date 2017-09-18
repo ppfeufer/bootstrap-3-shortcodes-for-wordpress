@@ -45,4 +45,17 @@ class ShortcodeHelper extends \WordPress\Plugin\BootstrapShortcodes\Libs\Singlet
 
 		return $return;
 	}
+
+	public function removeLinebreaksFromCode($code) {
+		$toReplace = array (
+			'<p>' => '',
+			'</p>' => '',
+			'<br />' => '',
+			'<br>' => ''
+		);
+
+		$code = \strtr($code, $toReplace);
+
+		return $code;
+	}
 }

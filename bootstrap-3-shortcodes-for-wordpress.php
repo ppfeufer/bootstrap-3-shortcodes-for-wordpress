@@ -41,39 +41,48 @@ class BootstrapShortcodes {
 		$javascriptLoader = new Libs\ResourceLoader\JavascriptLoader;
 		$javascriptLoader->init();
 
-		if(\is_admin()) {
-			/**
-			 * Check Github for updates
-			 */
-			$githubConfig = array(
-				'slug' => \plugin_basename(__FILE__),
-				'proper_folder_name' => \dirname(\plugin_basename(__FILE__)),
-				'api_url' => 'https://api.github.com/repos/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
-				'raw_url' => 'https://raw.github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress/master',
-				'github_url' => 'https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
-				'zip_url' => 'https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress/archive/master.zip',
-				'sslverify' => true,
-				'requires' => '4.7',
-				'tested' => '4.8',
-				'readme' => 'README.md',
-				'access_token' => '',
-			);
-
-			new Libs\GithubUpdater($githubConfig);
-		}
-
 		$this->initShortcodes();
+
+		if(\is_admin()) {
+			$this->initGitHubUpdater();
+		}
 	} // END public function init()
+
+	private function initGitHubUpdater() {
+		/**
+		 * Check Github for updates
+		 */
+		$githubConfig = array(
+			'slug' => \plugin_basename(__FILE__),
+			'proper_folder_name' => \dirname(\plugin_basename(__FILE__)),
+			'api_url' => 'https://api.github.com/repos/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
+			'raw_url' => 'https://raw.github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress/master',
+			'github_url' => 'https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress',
+			'zip_url' => 'https://github.com/ppfeufer/bootstrap-3-shortcodes-for-wordpress/archive/master.zip',
+			'sslverify' => true,
+			'requires' => '4.7',
+			'tested' => '4.8',
+			'readme' => 'README.md',
+			'access_token' => '',
+		);
+
+		new Libs\GithubUpdater($githubConfig);
+	}
 
 	private function initShortcodes() {
 		new Libs\Shortcodes(true);
-		new Libs\ShortcodesAccordion;
-		new Libs\ShortcodesBreadcrumb;
-		new Libs\ShortcodesButton;
-		new Libs\ShortcodesCarousel;
-		new Libs\ShortcodesList;
-		new Libs\ShortcodesNavigation;
-		new Libs\ShortcodesProgress;
+
+		new Libs\Shortcodes\Accordion;
+		new Libs\Shortcodes\Alert;
+		new Libs\Shortcodes\Badge;
+		new Libs\Shortcodes\Breadcrumb;
+		new Libs\Shortcodes\Button;
+		new Libs\Shortcodes\Caret;
+		new Libs\Shortcodes\Carousel;
+		new Libs\Shortcodes\Code;
+		new Libs\Shortcodes\Lists;
+		new Libs\Shortcodes\Navigation;
+		new Libs\Shortcodes\Progress;
 	}
 } // END class BootstrapShortcodes
 
