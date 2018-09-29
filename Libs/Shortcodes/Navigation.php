@@ -1,212 +1,230 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes;
+/*
+ * Copyright (C) 2017 ppfeufer
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-class Navigation extends \WordPress\Plugin\BootstrapShortcodes\Libs\Shortcodes implements \WordPress\Plugin\BootstrapShortcodes\Libs\Interfaces\ShortcodeInterface {
-	/**
-	 * Constructor
-	 */
-	public function __construct($addFilter = false) {
-		parent::__construct($addFilter);
+namespace WordPress\Plugins\BootstrapShortcodes\Libs\Shortcodes;
 
-		$this->registerShortcodes($this->getShortcodeArray());
-	} // END public function __construct()
+class Navigation extends \WordPress\Plugins\BootstrapShortcodes\Libs\Shortcodes implements \WordPress\Plugins\BootstrapShortcodes\Libs\Interfaces\ShortcodeInterface {
+    /**
+     * Constructor
+     */
+    public function __construct($addFilter = false) {
+        parent::__construct($addFilter);
 
-	/**
-	 * getting the supported shortcodes
-	 *
-	 * @return array Array with all supported shortcodes
-	 */
-	public function getShortcodeArray() {
-		$shortcodes = array(
-			'nav',
-			'nav-item',
-			'dropdown',
-			'dropdown-header',
-			'dropdown-item'
-		);
+        $this->registerShortcodes($this->getShortcodeArray());
+    }
 
-		return $shortcodes;
-	} // END private function getShortcodeArray()
+    /**
+     * getting the supported shortcodes
+     *
+     * @return array Array with all supported shortcodes
+     */
+    public function getShortcodeArray() {
+        $shortcodes = array(
+            'nav',
+            'nav-item',
+            'dropdown',
+            'dropdown-header',
+            'dropdown-item'
+        );
 
-	public function shortcodeNav($atts, $content = null) {
-		$args = \shortcode_atts(
-			array(
-				'type' => false,
-				'stacked' => false,
-				'justified' => false,
-				'xclass' => false,
-				'data' => false
-			), $atts
-		);
+        return $shortcodes;
+    }
 
-		$class = 'nav';
-		$class .= ($args['type'] !== false) ? ' nav-' . $args['type'] : ' nav-tabs';
-		$class .= ($args['stacked'] !== false) ? ' nav-stacked' : '';
-		$class .= ($args['justified'] !== false) ? ' nav-justified' : '';
-		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+    public function shortcodeNav($atts, $content = null) {
+        $args = \shortcode_atts(
+            array(
+                'type' => false,
+                'stacked' => false,
+                'justified' => false,
+                'xclass' => false,
+                'data' => false
+            ), $atts
+        );
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
+        $class = 'nav';
+        $class .= ($args['type'] !== false) ? ' nav-' . $args['type'] : ' nav-tabs';
+        $class .= ($args['stacked'] !== false) ? ' nav-stacked' : '';
+        $class .= ($args['justified'] !== false) ? ' nav-justified' : '';
+        $class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		return \sprintf(
-			'<ul class="%s"%s>%s</ul>',
-			\esc_attr(\trim($class)),
-			($dataProps !== null) ? ' ' . $dataProps : '',
-			\do_shortcode( $content )
-		);
-	}
+        $dataProps = \WordPress\Plugins\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
-	public function shortcodeNavItem($atts, $content = null) {
-		$args = \shortcode_atts(
-			array(
-				'link' => false,
-				'active' => false,
-				'disabled' => false,
-				'dropdown' => false,
-				'xclass' => false,
-				'data' => false
-			), $atts
-		);
+        return \sprintf(
+            '<ul class="%s"%s>%s</ul>',
+            \esc_attr(\trim($class)),
+            ($dataProps !== null) ? ' ' . $dataProps : '',
+            \do_shortcode( $content )
+        );
+    }
 
-		$liClasses = '';
-		$liClasses .= ($args['dropdown'] !== false) ? 'dropdown' : '';
-		$liClasses .= ($args['active'] !== false) ? ' active' : '';
-		$liClasses .= ($args['disabled'] !== false) ? ' disabled' : '';
+    public function shortcodeNavItem($atts, $content = null) {
+        $args = \shortcode_atts(
+            array(
+                'link' => false,
+                'active' => false,
+                'disabled' => false,
+                'dropdown' => false,
+                'xclass' => false,
+                'data' => false
+            ), $atts
+        );
 
-		$anchorClasses  = '';
-		$anchorClasses .= ($args['dropdown'] !== false) ? ' dropdown-toggle' : '';
-		$anchorClasses .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+        $liClasses = '';
+        $liClasses .= ($args['dropdown'] !== false) ? 'dropdown' : '';
+        $liClasses .= ($args['active'] !== false) ? ' active' : '';
+        $liClasses .= ($args['disabled'] !== false) ? ' disabled' : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
+        $anchorClasses  = '';
+        $anchorClasses .= ($args['dropdown'] !== false) ? ' dropdown-toggle' : '';
+        $anchorClasses .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		# Wrong idea I guess ....
-		#$pattern = ( $dropdown ) ? '<li%1$s><a href="%2$s"%3$s%4$s%5$s></a>%6$s</li>' : '<li%1$s><a href="%2$s"%3$s%4$s%5$s>%6$s</a></li>';
+        $dataProps = \WordPress\Plugins\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
-		//* If we have a dropdown shortcode inside the content we end the link before the dropdown shortcode, else all content goes inside the link
-		$content = ($args['dropdown'] !== false) ? \str_replace( '[dropdown]', '</a>[dropdown]', $content) : $content . '</a>';
+        /**
+         * If we have a dropdown shortcode inside the content we end the
+         * link before the dropdown shortcode, else all content
+         * goes inside the link
+         */
+        $content = ($args['dropdown'] !== false) ? \str_replace( '[dropdown]', '</a>[dropdown]', $content) : $content . '</a>';
 
-		return \sprintf(
-			'<li%1$s><a href="%2$s"%3$s%4$s%5$s>%6$s</li>',
-			(!empty($liClasses)) ? \sprintf(' class="%s"', \esc_attr($liClasses)) : '',
-			\esc_url($args['link']),
-			(!empty($anchorClasses))  ? \sprintf(' class="%s"', \esc_attr($anchorClasses))  : '',
-			($args['dropdown'])   ? ' data-toggle="dropdown"' : '',
-			($dataProps !== null) ? ' ' . $dataProps : '',
-			\do_shortcode($content)
-		);
-	}
+        return \sprintf(
+            '<li%1$s><a href="%2$s"%3$s%4$s%5$s>%6$s</li>',
+            (!empty($liClasses)) ? \sprintf(' class="%s"', \esc_attr($liClasses)) : '',
+            \esc_url($args['link']),
+            (!empty($anchorClasses))  ? \sprintf(' class="%s"', \esc_attr($anchorClasses))  : '',
+            ($args['dropdown'])   ? ' data-toggle="dropdown"' : '',
+            ($dataProps !== null) ? ' ' . $dataProps : '',
+            \do_shortcode($content)
+        );
+    }
 
-	/**
-	 * Shortcode:
-	 *		[dropdown][/dropdown]
-	 *
-	 * Supported Arguments:
-	 *		xclass
-	 *		data
-	 *
-	 * @link http://getbootstrap.com/javascript/#dropdowns Bootstrap 3 Dropdown
-	 *
-	 * @param array $atts
-	 * @param string $content
-	 * @return string
-	 */
-	public function shortcodeDropdown($atts, $content = null) {
-		$args = \shortcode_atts(
-			array(
-				'xclass' => false,
-				'data' => false
-			), $atts
-		);
+    /**
+     * Shortcode:
+     *      [dropdown][/dropdown]
+     *
+     * Supported Arguments:
+     *      xclass
+     *      data
+     *
+     * @link http://getbootstrap.com/javascript/#dropdowns Bootstrap 3 Dropdown
+     *
+     * @param array $atts
+     * @param string $content
+     * @return string
+     */
+    public function shortcodeDropdown($atts, $content = null) {
+        $args = \shortcode_atts(
+            array(
+                'xclass' => false,
+                'data' => false
+            ), $atts
+        );
 
-		$class = 'dropdown-menu';
-		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+        $class = 'dropdown-menu';
+        $class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
+        $dataProps = \WordPress\Plugins\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
-		return \sprintf(
-			'<ul role="menu" class="%s"%s>%s</ul>',
-			\esc_attr(\trim($class)),
-			($dataProps !== null) ? ' ' . $dataProps : '',
-			\do_shortcode($content)
-		);
-	} // END public function shortcodeDropdown($atts, $content = null)
+        return \sprintf(
+            '<ul role="menu" class="%s"%s>%s</ul>',
+            \esc_attr(\trim($class)),
+            ($dataProps !== null) ? ' ' . $dataProps : '',
+            \do_shortcode($content)
+        );
+    }
 
-	/**
-	 * Shortcode:
-	 *		[dropdown-header][/dropdown-header]
-	 *
-	 * Supported Arguments:
-	 *		xclass
-	 *		data
-	 *
-	 * @link http://getbootstrap.com/javascript/#dropdowns Bootstrap 3 Dropdown
-	 *
-	 * @param array $atts
-	 * @param string $content
-	 * @return string
-	 */
-	public function shortcodeDropdownHeader($atts, $content = null) {
-		$args = \shortcode_atts(
-			array(
-				'xclass' => false,
-				'data' => false
-			), $atts
-		);
+    /**
+     * Shortcode:
+     *      [dropdown-header][/dropdown-header]
+     *
+     * Supported Arguments:
+     *      xclass
+     *      data
+     *
+     * @link http://getbootstrap.com/javascript/#dropdowns Bootstrap 3 Dropdown
+     *
+     * @param array $atts
+     * @param string $content
+     * @return string
+     */
+    public function shortcodeDropdownHeader($atts, $content = null) {
+        $args = \shortcode_atts(
+            array(
+                'xclass' => false,
+                'data' => false
+            ), $atts
+        );
 
-		$class = 'dropdown-header';
-		$class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+        $class = 'dropdown-header';
+        $class .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
+        $dataProps = \WordPress\Plugins\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
-		return \sprintf(
-			'<li class="%s"%s>%s</li>',
-			\esc_attr(\trim($class)),
-			($dataProps !== null) ? ' ' . $dataProps : '',
-			\do_shortcode($content)
-		);
-	} // END public function shortcodeDropdownHeader($atts, $content = null)
+        return \sprintf(
+            '<li class="%s"%s>%s</li>',
+            \esc_attr(\trim($class)),
+            ($dataProps !== null) ? ' ' . $dataProps : '',
+            \do_shortcode($content)
+        );
+    }
 
-	/**
-	 * Shortcode:
-	 *		[dropdown-item][/dropdown-item]
-	 *
-	 * Supported Arguments:
-	 *		link
-	 *		disabled
-	 *		xclass
-	 *		data
-	 *
-	 * @link http://getbootstrap.com/javascript/#dropdowns Bootstrap 3 Dropdown
-	 *
-	 * @param array $atts
-	 * @param string $content
-	 * @return string
-	 */
-	public function shortcodeDropdownItem($atts, $content = null) {
-		$args = \shortcode_atts(
-			array(
-				'link' => false,
-				'disabled' => false,
-				'xclass' => false,
-				'data' => false
-			), $atts
-		);
+    /**
+     * Shortcode:
+     *      [dropdown-item][/dropdown-item]
+     *
+     * Supported Arguments:
+     *      link
+     *      disabled
+     *      xclass
+     *      data
+     *
+     * @link http://getbootstrap.com/javascript/#dropdowns Bootstrap 3 Dropdown
+     *
+     * @param array $atts
+     * @param string $content
+     * @return string
+     */
+    public function shortcodeDropdownItem($atts, $content = null) {
+        $args = \shortcode_atts(
+            array(
+                'link' => false,
+                'disabled' => false,
+                'xclass' => false,
+                'data' => false
+            ), $atts
+        );
 
-		$liClass = '';
-		$liClass .= ($args['disabled'] !== false) ? ' disabled' : '';
+        $liClass = '';
+        $liClass .= ($args['disabled'] !== false) ? ' disabled' : '';
 
-		$anchorClass  = '';
-		$anchorClass .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
+        $anchorClass  = '';
+        $anchorClass .= ($args['xclass'] !== false) ? ' ' . $args['xclass'] : '';
 
-		$dataProps = \WordPress\Plugin\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
+        $dataProps = \WordPress\Plugins\BootstrapShortcodes\Libs\Helper\ShortcodeHelper::getInstance()->parseDataAttributes($args['data']);
 
-		return \sprintf(
-			'<li role="presentation" class="%s"><a role="menuitem" href="%s" class="%s"%s>%s</a></li>',
-			\esc_attr($liClass),
-			\esc_url($args['link']),
-			\esc_attr($anchorClass),
-			($dataProps !== null) ? ' ' . $dataProps : '',
-			\do_shortcode($content)
-		);
-	} // END public function shortcodeDropdownItem($atts, $content = null)
+        return \sprintf(
+            '<li role="presentation" class="%s"><a role="menuitem" href="%s" class="%s"%s>%s</a></li>',
+            \esc_attr($liClass),
+            \esc_url($args['link']),
+            \esc_attr($anchorClass),
+            ($dataProps !== null) ? ' ' . $dataProps : '',
+            \do_shortcode($content)
+        );
+    }
 }

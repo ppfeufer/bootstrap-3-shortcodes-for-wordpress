@@ -1,61 +1,78 @@
 <?php
 
-namespace WordPress\Plugin\BootstrapShortcodes\Libs\Helper;
+/*
+ * Copyright (C) 2017 ppfeufer
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-class ShortcodeHelper extends \WordPress\Plugin\BootstrapShortcodes\Libs\Singletons\AbstractSingleton {
-	public function parseDataAttributes($data) {
-		$dataProps = null;
+namespace WordPress\Plugins\BootstrapShortcodes\Libs\Helper;
 
-		if(!empty($data)) {
-			$data = \explode('|', $data);
+class ShortcodeHelper extends \WordPress\Plugins\BootstrapShortcodes\Libs\Singletons\AbstractSingleton {
+    public function parseDataAttributes($data) {
+        $dataProps = null;
 
-			foreach($data as $d) {
-				$d = \explode(',', $d);
-				$dataProps .= \sprintf('data-%1$s="%2$s" ', \esc_html($d[0]), \esc_attr(\trim($d[1])));
-			}
-		}
+        if(!empty($data)) {
+            $data = \explode('|', $data);
 
-		return $dataProps;
-	}
+            foreach($data as $d) {
+                $d = \explode(',', $d);
+                $dataProps .= \sprintf('data-%1$s="%2$s" ', \esc_html($d[0]), \esc_attr(\trim($d[1])));
+            }
+        }
 
-	/**
-	 * Create attributes map so we can get the attributes of a wrapped shortcode
-	 *
-	 * Used by:
-	 *		shortcodeCarousel
-	 *		shortcodeTabs
-	 *
-	 * @param string $string
-	 * @param type $att
-	 * @return type
-	 */
-	public function getAttributeMap($string) {
-		$res = array();
-		$return = array();
-		$reg = \get_shortcode_regex();
-		\preg_match_all('~' . $reg . '~', $string, $matches);
+        return $dataProps;
+    }
 
-		foreach($matches[2] as $key => $name) {
-			$parsed = \shortcode_parse_atts($matches[3][$key]);
-			$parsed = \is_array($parsed) ? $parsed : array();
+    /**
+     * Create attributes map so we can get the attributes of a wrapped shortcode
+     *
+     * Used by:
+     *      shortcodeCarousel
+     *      shortcodeTabs
+     *
+     * @param string $string
+     * @param type $att
+     * @return type
+     */
+    public function getAttributeMap($string) {
+        $res = array();
+        $return = array();
+        $reg = \get_shortcode_regex();
+        \preg_match_all('~' . $reg . '~', $string, $matches);
 
-			$res[$name] = $parsed;
-			$return[] = $res;
-		}
+        foreach($matches[2] as $key => $name) {
+            $parsed = \shortcode_parse_atts($matches[3][$key]);
+            $parsed = \is_array($parsed) ? $parsed : array();
 
-		return $return;
-	}
+            $res[$name] = $parsed;
+            $return[] = $res;
+        }
 
-	public function removeLinebreaksFromCode($code) {
-		$toReplace = array (
-			'<p>' => '',
-			'</p>' => '',
-			'<br />' => '',
-			'<br>' => ''
-		);
+        return $return;
+    }
 
-		$code = \strtr($code, $toReplace);
+    public function removeLinebreaksFromCode($code) {
+        $toReplace = array (
+            '<p>' => '',
+            '</p>' => '',
+            '<br />' => '',
+            '<br>' => ''
+        );
 
-		return $code;
-	}
+        $code = \strtr($code, $toReplace);
+
+        return $code;
+    }
 }
