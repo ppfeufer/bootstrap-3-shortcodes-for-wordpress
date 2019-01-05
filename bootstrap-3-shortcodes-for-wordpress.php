@@ -30,7 +30,8 @@
  */
 
 namespace WordPress\Plugins\BootstrapShortcodes;
-const WP_GITHUB_FORCE_UPDATE = true;
+
+const WP_GITHUB_FORCE_UPDATE = false;
 
 // Include the autoloader so we can dynamically include the rest of the classes.
 require_once(\trailingslashit(\dirname(__FILE__)) . 'inc/autoloader.php');
